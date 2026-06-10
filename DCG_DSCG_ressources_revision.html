@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCG & DSCG — Ressources de révision</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAFAF7;--surface:#fff;--border:#E8E6E0;--text:#1A1A1A;--dim:#6B6960;--accent:#8B4513;--accent2:#2E5A3C;--tag-manuel:#2E5A3C;--tag-fiches:#7B5E2D;--tag-annales:#8B2E2E;--tag-cas:#3B5998;--navy:#1B3A5C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+.hero{padding:80px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-family:'Newsreader',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:600;margin:16px 0 12px;line-height:1.2}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--dim);font-size:15px;max-width:600px;margin:0 auto}
+.toc{max-width:900px;margin:0 auto 40px;padding:0 24px}
+.toc-inner{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px 24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.toc a{font-size:13px;color:var(--accent);text-decoration:none;padding:6px 14px;border:1px solid var(--border);border-radius:100px;transition:all .2s}
+.toc a:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.section{max-width:900px;margin:0 auto 48px;padding:0 24px}
+.section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-head h2{font-family:'Newsreader',serif;font-size:1.4rem;font-weight:600}
+.section-head .note{font-size:12px;color:var(--dim)}
+.ue-group{margin-bottom:32px}
+.ue-label{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;color:var(--accent);margin-bottom:12px;padding:6px 0;border-bottom:1px dashed var(--border);display:flex;justify-content:space-between;align-items:center}
+.ue-label .priority{font-family:'DM Sans',sans-serif;font-size:11px;padding:2px 8px;border-radius:4px}
+.p-high{background:#FCEBEB;color:#8B2E2E}
+.p-med{background:#FFF3E0;color:#7B5E2D}
+.p-low{background:#EAF3DE;color:#2E5A3C}
+.p-exempt{background:#E6F1FB;color:#185FA5}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:10px;transition:border-color .2s}
+.card:hover{border-color:#ccc}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.card-title{font-weight:500;font-size:14px;line-height:1.4}
+.card-title a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:border-color .2s}
+.card-title a:hover{border-color:var(--accent);color:var(--accent)}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.b-manuel{background:#EAF3DE;color:#2E5A3C}
+.b-fiches{background:#FFF3E0;color:#7B5E2D}
+.b-annales{background:#FCEBEB;color:#8B2E2E}
+.b-cas{background:#E6F1FB;color:#3B5998}
+.b-expert{background:#F3E8FF;color:#5E3D7A}
+.b-flash{background:#E0F7F1;color:#0F6E56}
+.card-meta{font-size:12px;color:var(--dim);margin-bottom:4px}
+.card-desc{font-size:13px;color:var(--dim);line-height:1.6}
+.card-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.card-links a{font-size:12px;color:var(--accent);text-decoration:none;font-weight:500}
+.card-links a:hover{text-decoration:underline}
+.free-section{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;padding:20px 24px;margin-bottom:24px}
+.free-section h3{font-family:'Newsreader',serif;font-size:1.1rem;margin-bottom:8px;color:var(--accent2)}
+.free-section p,.free-section li{font-size:13px;color:var(--dim);line-height:1.7}
+.free-section ul{padding-left:18px;margin-top:6px}
+.free-section li{margin-bottom:4px}
+.free-section a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--border)}
+.free-section a:hover{border-color:var(--accent)}
+.tip{background:#FFFEF5;border:1px solid #E8E2C8;border-radius:8px;padding:16px 20px;margin:20px 0;font-size:13px;color:var(--dim);line-height:1.7}
+.tip strong{color:var(--text)}
+footer{text-align:center;padding:40px 24px;font-size:11px;color:var(--dim);border-top:1px solid var(--border);max-width:900px;margin:0 auto}
+@media(max-width:640px){.card-top{flex-direction:column;gap:4px}.toc-inner{flex-direction:column;align-items:stretch}.toc a{text-align:center}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="hero-label">Study Resources Guide</div>
+<h1>DCG & DSCG <em>复习资料清单</em></h1>
+<p>涵盖教材（manuels）、复习卡（fiches）、历年真题（annales）、案例练习（cas pratiques）。按 UE 分类整理，附出版社、参考价格与购买链接。面向所有 DCG / DSCG 考生。</p>
+</header>
+
+<nav class="toc">
+<div class="toc-inner">
+<a href="#intro">资料类型说明</a>
+<a href="#dcg-droit">DCG · 法律类</a>
+<a href="#dcg-compta">DCG · 会计类</a>
+<a href="#dcg-finance">DCG · 金融管理类</a>
+<a href="#dcg-other">DCG · 其他</a>
+<a href="#dscg">DSCG</a>
+<a href="#annales">免费真题资源</a>
+<a href="#acheter">在哪里买</a>
+</div>
+</nav>
+
+<!-- ===== 资料类型说明 ===== -->
+<section class="section" id="intro">
+<div class="section-head"><h2>四种资料类型，怎么搭配</h2></div>
+<div class="tip">
+DCG / DSCG 的备考资料大致分四类，各有用途，建议组合使用：<br><br>
+<strong>Manuel（教材）</strong> — 系统讲解知识点，是主干。每门 UE 选一本通读即可（Dunod / Nathan / Foucher 等任选其一）。<br>
+<strong>Fiches de révision（复习卡）</strong> — 浓缩知识点的速记卡，约 60–80 张/本，适合考前冲刺与查漏。<br>
+<strong>Cas pratiques / Exercices（案例与练习）</strong> — 实战题集，掌握基础后用于反复做题（Corroy、Dunod EXPERT 系列较常见）。<br>
+<strong>Annales（历年真题）</strong> — 备考核心，多数可免费下载（见下方资源）。务必限时模拟、对照校正分析错误。<br><br>
+<strong>选版本的原则：</strong>法律与税法类（UE 1/2/3/4、DSCG 1）法规每年变动，<strong>必须买最新版</strong>；其余科目可视情况买前一年版本省钱。各出版社官网通常可在线试读，挑读起来最顺的一本。
+</div>
+</section>
+
+<!-- ===== DCG 法律类 ===== -->
+<section class="section" id="dcg-droit">
+<div class="section-head"><h2>DCG — 法律类（UE 1 / 2 / 3 / 4）</h2></div>
+
+<div class="ue-group">
+<div class="ue-label">UE 1 · Fondamentaux du droit（法律基础）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-1-fondamentaux-du-droit-manuel-2025-2026" target="_blank">DCG 1 - Fondamentaux du droit - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~32€ · Jean-François Bocquillon · 每年5月更新</div>
+<div class="card-desc">法国民法体系入门：人、合同、责任、财产、商事活动。非法国法律背景的考生建议通读，建立法国法律逻辑。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://superieur-concours.nathan.fr/DCG-Manuels-Nouveaux-programmes-recherche" target="_blank">DCG 1 - Fondamentaux du droit - Manuel & Applications</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Nathan · ~27€ · 含练习和考试模拟题</div>
+<div class="card-desc">Nathan 版，课程+练习合一，风格更注重应试。Dunod 和 Nathan 选一本即可。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 2 · Droit des sociétés（公司法）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-2-droit-des-societes-manuel-2025-2026" target="_blank">DCG 2 - Droit des sociétés - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~32€ · Bocquillon, David, Grosjean-Leccia · Mai 2025</div>
+<div class="card-desc">SA、SAS、SARL 等法国公司形式的设立、治理、解散。公司会计与法律的基础科目。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 3 · Droit social（劳动法与社会法）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-3-droit-social-manuel-2025-2026" target="_blank">DCG 3 - Droit social - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~34€ · Bocquillon · Mai 2025</div>
+<div class="card-desc">CDI/CDD、解雇保护、社保缴费、工会制度。法国劳动法与社会保障体系。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 4 · Droit fiscal（税法）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-4-droit-fiscal-manuel-2025-2026" target="_blank">DCG 4 - Droit fiscal - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~34€ · Gonthier-Besacier · Mai 2025 · À jour du PCG 2025</div>
+<div class="card-desc">TVA、IS（法人税）、IR（个人所得税）、BIC/BNC。法国税法核心，覆盖增值税与企业所得税的申报与计算。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title">DCG 4 - Droit fiscal - Manuel & Applications</span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Fontaine Picard · ~25€ · Gilles Meyer · Juin 2025</div>
+<div class="card-desc">Fontaine Picard 版以大量练习著称，适合需要反复做题的科目。可以作为 Dunod 的补充。</div>
+</div>
+</div>
+</section>
+
+<!-- ===== DCG 会计类 ===== -->
+<section class="section" id="dcg-compta">
+<div class="section-head"><h2>DCG — 会计类（UE 9 / 10 / 11）</h2></div>
+
+<div class="ue-group">
+<div class="ue-label">UE 9 · Comptabilité（会计学）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-9-comptabilite-manuel-2025-2026" target="_blank">DCG 9 - Comptabilité - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~32€ · À jour du PCG 2025（新版计划，含 ANC n°2022-06 现代化改革）</div>
+<div class="card-desc">PCG 下的日常记账、journal、grand livre、balance、年末调整、年度报表编制。会计入门主干教材。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://superieur-concours.nathan.fr/catalogue/dcg-9-comptabilite-2025-2026-manuel-applications-avec-entrainements-preparation-examen-epreuve-9-9782095053789" target="_blank">DCG 9 - Comptabilité 2025-2026 - Manuel & Applications</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Nathan · ~27€ · À jour du PCG 2025</div>
+<div class="card-desc">Nathan 版，含 QCM、exercices pratiques、cas complets type examen。与 Dunod 选一即可。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 10 · Comptabilité approfondie（高级会计）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-10-comptabilite-approfondie-manuel-2025-2026" target="_blank">DCG 10 - Comptabilité approfondie - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~34€ · Marie-Pierre Mairesse · Mai 2025</div>
+<div class="card-desc">法国准则下的资产评估、减值、provisions、opérations en devises、fusions 等深入处理。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 11 · Contrôle de gestion（管理控制）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-11-controle-gestion" target="_blank">DCG 11 - Contrôle de gestion - Manuel</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~32€</div>
+<div class="card-desc">Coûts complets、coûts partiels、ABC、budgets、écarts（成本计算、预算与差异分析）。</div>
+</div>
+</div>
+</section>
+
+<!-- ===== DCG 金融管理类 ===== -->
+<section class="section" id="dcg-finance">
+<div class="section-head"><h2>DCG — 金融、经济、管理类（UE 5 / 6 / 7 / 8 / 12）</h2></div>
+
+<div class="ue-group">
+<div class="ue-label">UE 6 · Finance d'entreprise（公司金融）</div>
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dcg-6-finance-entreprise" target="_blank">DCG 6 - Finance d'entreprise - Manuel</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~32€ · À jour du PCG 2025</div>
+<div class="card-desc">财务诊断、投资决策、融资结构、SIG、CAF。公司财务核心科目；Vernimmen 网站可作免费补充。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 5/7/8/12 · 经济/管理/信息系统/英语 </div>
+<div class="card">
+<div class="card-desc" style="padding:4px 0">UE5 当代经济、UE7 管理学、UE8 管理信息系统、UE12 商务英语。各出版社均有对应 manuel，可按需选购。</div>
+</div>
+</div>
+</section>
+
+<!-- ===== DCG 其他资料类型 ===== -->
+<section class="section" id="dcg-other">
+<div class="section-head"><h2>DCG — Fiches de révision & Cas pratiques</h2></div>
+
+<div class="tip"><strong>Fiches（复习卡）</strong>是浓缩版知识点，每本约 15€，适合考前速记。<strong>Cas pratiques（案例练习）</strong>是模拟实战题，Corroy 出版社最知名。建议在掌握 manuel 内容后，再用 fiches 与 cas 强化。</div>
+
+<div class="ue-group">
+<div class="ue-label">Dunod · Fiches de révision（全部 UE 可选）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/thematique/prepas-concours/expertise-comptable/dcg" target="_blank">DCG Fiches de révision 系列（UE 1-13）</a></span>
+<span class="badge b-fiches">Fiches</span>
+</div>
+<div class="card-meta">Dunod · ~15€/本 · 可拆卸式卡片 · 每年更新</div>
+<div class="card-desc">100% 对标考试大纲。每本约 60–80 张卡片，涵盖关键定义、公式、图表、考试技巧。作者多为考试评审组成员。可按薄弱科目选购。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/thematique/prepas-concours/expertise-comptable/dcg" target="_blank">DCG Flashcards 系列</a></span>
+<span class="badge b-flash">Flashcards</span>
+</div>
+<div class="card-meta">Dunod · ~13€/盒 · 约170张/盒</div>
+<div class="card-desc">2025年新出的记忆卡片系列。目前有 UE1（Fondamentaux du droit）、UE9（Comptabilité）、UE11（Contrôle de gestion）。基于间隔重复（spaced repetition）原理。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">Corroy · Cas pratiques（案例练习）</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title">Éditions Corroy - Exercices corrigés 系列（全部 UE）</span>
+<span class="badge b-cas">Cas pratiques</span>
+</div>
+<div class="card-meta">Corroy · ~18€/本（énoncé）+ ~18€/本（corrigé）· 注意题目和答案分开售卖</div>
+<div class="card-desc">以大量真实案例著称的练习集。题目来源于实际企业场景。适合在掌握基础知识后做题巩固。注意：题目和答案是两本单独的书。</div>
+<div class="card-links"><a href="https://www.editions-corroy.fr/" target="_blank">Corroy 官网 →</a></div>
+</div>
+</div>
+</section>
+
+<!-- ===== DSCG ===== -->
+<section class="section" id="dscg">
+<div class="section-head"><h2>DSCG — 主要教材（以 UE1 与 UE4 为例）</h2><span class="note">含 manuel / fiches / cas</span></div>
+
+<div class="ue-group">
+<div class="ue-label">UE 1 · Gestion juridique, fiscale et sociale <span class="priority p-high">公认较难</span></div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dscg1-gestion-juridique-fiscale-et-sociale-manuel-2025-2026" target="_blank">DSCG 1 - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~38€ · Do Carmo Silva · À jour du PCG 2025 · 700+ pages</div>
+<div class="card-desc">DCG UE1+2+3+4 的综合升级版。法国法律 + 税法 + 社会法的深度案例分析。公认较难的一门，需系统学习。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.editions-foucher.fr/livre/dscg-1-gestion-juridique-sociale-et-fiscale-manuel-et-applications-millesime-2025-2026-9782216175765" target="_blank">DSCG 1 - Manuel et Applications 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Foucher · ~31€ · Burlaud, Jomard, Devaux · 含 jurisprudence 实例</div>
+<div class="card-desc">Foucher 版侧重法律实务和案例分析，含大量判例法（jurisprudence）引用。可作为 Dunod 的补充或替代。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dscg-1-gestion-juridique-fiscale-et-sociale-fiches-2026-2027" target="_blank">DSCG 1 - Fiches de révision 2026-2027</a></span>
+<span class="badge b-fiches">Fiches</span>
+</div>
+<div class="card-meta">Dunod · ~16€ · Véronique Roy · 63 fiches détachables</div>
+<div class="card-desc">考前冲刺用。涵盖从 contrats d'entreprise 到 fiscalité des groupes 的全部知识点。作者是考试评审组成员。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/livres-preparer-reussir-le-dscg" target="_blank">DSCG 1 - EXPERT - Études de cas 2025-2026</a></span>
+<span class="badge b-expert">Expert</span>
+</div>
+<div class="card-meta">Dunod · ~28€ · 真实案例+分步解析</div>
+<div class="card-desc">"Expert" 系列是 Dunod 的高阶练习集，案例取自真实企业情境，模拟考试的综合案例分析（cas de synthèse）。备考最后阶段使用。</div>
+</div>
+</div>
+
+<div class="ue-group">
+<div class="ue-label">UE 4 · Comptabilité et audit <span class="priority p-high">公认较难</span></div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dscg-4-comptabilite-et-audit-manuel-2025-2026" target="_blank">DSCG 4 - Comptabilité et audit - Manuel 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Dunod · ~42€ · Robert Obert · À jour du PCG 2025 · 800+ pages</div>
+<div class="card-desc">合并报表（consolidation）、IFRS 深入、审计方法论（démarche d'audit）、CAC 职业道德。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.editions-foucher.fr/recherche-etudiants/filiere/expertise-comptable-dcg-dscg-7007/diplome/dscg-6725" target="_blank">DSCG 4 - Manuel et Applications 2025-2026</a></span>
+<span class="badge b-manuel">Manuel</span>
+</div>
+<div class="card-meta">Foucher · ~31€ · Bensadon, Burlaud, Mikol</div>
+<div class="card-desc">Foucher 版，含应用练习。可与 Dunod 对照学习不同处理方法。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/prepas-concours/dscg-4-comptabilite-et-audit-fiches-2025-2026" target="_blank">DSCG 4 - Fiches de révision 2025-2026</a></span>
+<span class="badge b-fiches">Fiches</span>
+</div>
+<div class="card-meta">Dunod · ~16€ · Robert Obert</div>
+<div class="card-desc">考前速记卡片。合并方法、审计流程、IFRS vs PCG 对比等核心知识点。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title"><a href="https://www.dunod.com/livres-preparer-reussir-le-dscg" target="_blank">DSCG 4 - EXPERT - Comptabilité et audit 2025-2026</a></span>
+<span class="badge b-expert">Expert</span>
+</div>
+<div class="card-meta">Dunod · ~28€ · 综合案例</div>
+<div class="card-desc">高阶练习集，模拟考试环境的综合案例。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title">DSCG 4 - 90 exercices corrigés 2025-2026</span>
+<span class="badge b-cas">Exercices</span>
+</div>
+<div class="card-meta">Dunod · ~25€ · 90道练习+详细解析</div>
+<div class="card-desc">按主题分类的练习集，从基础到综合。适合系统刷题。</div>
+</div>
+
+<div class="card">
+<div class="card-top">
+<span class="card-title">DSCG 4 - Révisez en 132 flashcards !</span>
+<span class="badge b-flash">Flashcards</span>
+</div>
+<div class="card-meta">Dunod · ~13€ · 132张记忆卡</div>
+<div class="card-desc">间隔重复记忆卡。合并、审计、IFRS 的核心概念和定义。</div>
+</div>
+</div>
+</section>
+
+<!-- ===== 免费真题资源 ===== -->
+<section class="section" id="annales">
+<div class="section-head"><h2>免费真题（Annales）资源</h2></div>
+
+<div class="free-section">
+<h3>官方和社区免费下载</h3>
+<p>DCG 和 DSCG 的历年真题（2008年至今）可以在以下网站免费下载 PDF：</p>
+<ul>
+<li><a href="https://www.compta-online.com/sujets-et-corriges-du-dcg-depuis-2008-ao3077" target="_blank">Compta Online — DCG 真题+社区校正</a>（2008-2025，每年更新校正稿）</li>
+<li><a href="https://www.compta-online.com/les-sujets-et-corriges-du-dscg-ao2996" target="_blank">Compta Online — DSCG 真题+社区校正</a>（2008-2025）</li>
+<li><a href="https://www.crcf-edu.fr/category/ressources/enseignement-superieur/dcg-dscg/sujets-dcg/" target="_blank">CRCF（Centre de Ressources Comptabilité Finance）</a> — 教育部下属资源中心，提供官方题目+部分校正</li>
+<li><a href="https://ficheben.com/pages/annales-dcg" target="_blank">FicheBEN — DCG 真题汇总</a>（按 UE 和年份分类，一键下载）</li>
+<li><a href="https://ressources.lamacompta.co/toutes-les-annales-des-epreuves-du-dcg-et-leurs-corriges-2/" target="_blank">LamaCompta — DCG 真题汇总</a></li>
+<li><a href="https://ressources.lamacompta.co/toutes-les-annales-des-epreuves-du-dscg-et-leurs-corriges/" target="_blank">LamaCompta — DSCG 真题汇总</a></li>
+<li><a href="https://www.lesgeeksdeschiffres.com/post/sujets-et-corriges-dcg" target="_blank">Les Geeks des Chiffres — DCG 真题</a></li>
+<li><a href="https://www.pro-compta.fr/annalesdscg" target="_blank">ProCompta — DSCG 真题（2020-2025）</a></li>
+</ul>
+<p style="margin-top:8px"><strong>使用建议：</strong>不要只背答案。先完整做一套题（限时），然后对照校正分析错误。重点做最近3年的真题，因为法规每年变化。</p>
+</div>
+
+<div class="free-section">
+<h3>Révizaide 官网（免费课程+练习）</h3>
+<p>Corinne Zambotto（IUT Sorbonne Paris Nord 聚合教师）的网站，按主题提供系统的课程笔记、练习和校正：</p>
+<ul>
+<li><a href="https://sites.google.com/site/revizaide/" target="_blank">Révizaide 官网</a> — 涵盖 comptabilité générale、comptabilité analytique、analyse financière、fiscalité</li>
+</ul>
+</div>
+</section>
+
+<!-- ===== 在哪里买 ===== -->
+<section class="section" id="acheter">
+<div class="section-head"><h2>在哪里买</h2></div>
+
+<div class="free-section">
+<h3>线上购买</h3>
+<ul>
+<li><a href="https://www.amazon.fr" target="_blank">Amazon.fr</a> — 最全最快，Prime 次日达</li>
+<li><a href="https://www.fnac.com" target="_blank">Fnac.com</a> — 法国最大文化零售商，常有会员折扣</li>
+<li><a href="https://www.dunod.com" target="_blank">Dunod.com</a> — 出版社直购，可买 ebook（~60% 纸质价）</li>
+<li><a href="https://superieur-concours.nathan.fr" target="_blank">Nathan 官网</a> — Nathan 系列直购</li>
+<li><a href="https://www.editions-foucher.fr" target="_blank">Foucher 官网</a> — Foucher 系列直购</li>
+</ul>
+</div>
+
+<div class="free-section">
+<h3>二手购买（省钱）</h3>
+<ul>
+<li><a href="https://www.leboncoin.fr" target="_blank">leboncoin.fr</a> — 搜索 "DCG Dunod" 或 "DSCG"</li>
+<li><a href="https://www.vinted.fr" target="_blank">Vinted.fr</a> — 同上</li>
+<li>学校 BDE（学生会）的二手书交流群</li>
+</ul>
+<p style="margin-top:8px"><strong>注意：</strong>UE 1/2/3/4（法律和税法类）必须买最新版（法规每年变动）。UE 5/6/7/8/9/10/11 可以买前一年版本省钱。</p>
+</div>
+</section>
+
+<footer>
+<p>本清单基于 2025-2026 版教材信息整理，供 DCG / DSCG 考生参考。价格为出版社建议零售价，实际以购买平台为准。</p>
+<p style="margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#bbb">Last updated: May 2026</p>
+</footer>
+
+</body>
+</html>
